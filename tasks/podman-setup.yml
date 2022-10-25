@@ -3,10 +3,13 @@
     name: gitea
     disable_dns: false
     internal: false
+    recreate: false
+    state: present
 
 - name: Gitea Setup | Configure podman volume
   containers.podman.podman_volume:
     name: gitea
+    state: present
 
 - name: Gitea Setup | Ensure Gitea container is not present already
   containers.podman.podman_container:

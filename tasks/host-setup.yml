@@ -6,27 +6,28 @@
     state: present
   become: true
 
-- name: Gitea Setup | Ensure firewalld is started
-  ansible.builtin.service:
-    name: firewalld
-    state: started
-    enabled: true
-  become: true
-
 - name: Gitea Setup | Check if firewalld is running
   ansible.builtin.service_facts:
   become: true
+- name: Gitea Setup | Configure firewalld if running
+  block:
+    - name: Gitea Setup | Ensure firewalld is configured to accept traffic
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        state: enabled
+        permanent: true
+      loop:
+        - "{{ gitea_ssh_port | default(2222, true) }}/tcp"
+        - "{{ gitea_web_port | default(3000, true) }}/tcp"
+      when: ansible_facts.services["firewalld.service"] is defined
+      become: true
 
-- name: Gitea Setup | Ensure firewalld is configured to accept traffic
-  ansible.posix.firewalld:
-    port: "{{ item }}"
-    state: enabled
-    permanent: true
-  loop:
-    - "{{ gitea_ssh_port | default(2222, true) }}/tcp"
-    - "{{ gitea_web_port | default(3000, true) }}/tcp"
-  when: ansible_facts.services["firewalld.service"] is defined
-  become: true
+    - name: Gitea Setup | Ensure firewalld is started
+      ansible.builtin.service:
+        name: firewalld
+        state: restarted
+        enabled: true
+      become: true
 
 - name: Gitea Setup | Ensure gitea registry configuration is in place
   ansible.builtin.template:
