@@ -1,5 +1,5 @@
 ---
-- name: Install and enable Podman
+- name: Gitea Setup | Install and enable Podman
   ansible.builtin.dnf:
     name:
       - podman
@@ -7,14 +7,14 @@
     state: present
   become: true
 
-- name: Ensure firewalld is started
+- name: Gitea Setup | Ensure firewalld is started
   ansible.builtin.service:
     name: firewalld
     state: started
     enabled: true
   become: true
 
-- name: Ensure firewalld is configured to accept traffic
+- name: Gitea Setup | Ensure firewalld is configured to accept traffic
   ansible.posix.firewalld:
     port: "{{ item }}"
     state: enabled
@@ -24,7 +24,7 @@
     - "{{ gitea_web_port | default(3000, true) }}/tcp"
   become: true
 
-- name: Ensure gitea registry configuration is in place
+- name: Gitea Setup | Ensure gitea registry configuration is in place
   ansible.builtin.template:
     src: gitea.conf.j2
     dest: /etc/containers/registries.conf.d/gitea.conf

@@ -1,19 +1,19 @@
-- name: Configure podman network
+- name: Gitea Setup | Configure podman network
   containers.podman.podman_network:
     name: gitea
     disable_dns: false
     internal: false
 
-- name: Configure podman volume
+- name: Gitea Setup | Configure podman volume
   containers.podman.podman_volume:
     name: gitea
 
-- name: Ensure gitea container is not present already
+- name: Gitea Setup | Ensure Gitea container is not present already
   containers.podman.podman_container:
     name: gitea
     state: absent
 
-- name: Create gitea container
+- name: Gitea Setup | Create gitea container
   containers.podman.podman_container:
     name: gitea
     network:
