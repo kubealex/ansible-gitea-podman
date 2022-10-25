@@ -1,31 +1,41 @@
 Role Name
 =========
 
-A brief description of the role goes here.
-
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This is a quick and dirty role to instantiate a Podman based Gitea instance for dev/test purposes.
 
 Role Variables
 --------------
+The role has these predefined variables in *defaults/main.yml*:
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+gitea_ssh_port: 2222 # Sets up the listening port for SSH on the host
+gitea_web_port: 3000 # Sets up the listening port for Gitea web interface/Registry on the host
+gitea_admin_user: gitea # Admin username
+gitea_admin_password: redhat # Admin password
+gitea_admin_email: gitea@gitea.lab # Admin email
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+*containers.podman* collection is required to run the module.
 
 Example Playbook
 ----------------
 
+User this requirements.yml to setup your dependencies:
+
+    ---
+    collections:
+      - community.general
+      - ansible.posix
+    roles:
+      - name: ansible-gitea-podman
+        src: https://github.com/kubealex/ansible-gitea-podman.git
+
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: podman_host
       roles:
-         - { role: username.rolename, x: 42 }
+        - ansible-gitea-podman
 
 License
 -------
