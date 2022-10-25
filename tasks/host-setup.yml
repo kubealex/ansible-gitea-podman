@@ -29,5 +29,5 @@
       "[[registry]]
        location = "localhost:3000"
        insecure = true"
-    dest: /etc/containers/registies.conf.d/gitea.conf
+    dest: /etc/containers/registries.conf.d/gitea.conf
     mode: 0755
