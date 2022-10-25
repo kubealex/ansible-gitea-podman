@@ -1,4 +1,4 @@
-Role Name
+ansible-gitea-podman
 =========
 
 This is a quick and dirty role to instantiate a Podman based Gitea instance for dev/test purposes.
