@@ -20,9 +20,9 @@
       - gitea
     volume:
       - gitea:/data
-    image: docker.io/gitea/gitea:latest
+    image: docker.io/gitea/gitea:latest-rootless
     ports:
-      - "{{ gitea_ssh_port | default(2222,true) }}:22"
+      - "{{ gitea_ssh_port | default(2222,true) }}:2222"
       - "{{ gitea_web_port | default(3000,true) }}:3000"
     env:
       GITEA__security__INSTALL_LOCK: true
