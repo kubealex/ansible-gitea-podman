@@ -1,0 +1,23 @@
+- name: Configure podman network
+  containers.podman.podman_network:
+    name: gitea
+    disable_dns: false
+    internal: false
+
+- name: Configure podman volume
+  containers.podman.podman_volume:
+    name: gitea
+
+- name: Create gitea container
+  containers.podman.podman_container:
+    name: gitea
+    network:
+      - gitea
+    volume:
+      - gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    image: gitea/gitea:latest
+    ports:
+      - "{{ gitea_ssh_port | default(222,true) }}:22"
+      - "{{ gitea_web_port | default(3000,true) }}:3000"

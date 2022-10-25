@@ -1,0 +1,14 @@
+---
+- name: Install and enable Podman
+  ansible.builtin.dnf:
+    name:
+      - podman
+      - firewalld
+    state: present
+
+- name: Ensure firewalld is installed
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+    enabled: true
+
