@@ -5,9 +5,11 @@
       - podman
       - firewalld
     state: present
+  become: true
 
 - name: Ensure firewalld is installed
   ansible.builtin.service:
     name: firewalld
     state: started
     enabled: true
+  become: true
