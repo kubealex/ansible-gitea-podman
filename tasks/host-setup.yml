@@ -7,9 +7,27 @@
     state: present
   become: true
 
-- name: Ensure firewalld is installed
+- name: Ensure firewalld is started
   ansible.builtin.service:
     name: firewalld
     state: started
     enabled: true
   become: true
+
+- name: Ensure firewalld is configured to accept traffic
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    state: enabled
+    permanent: true
+  loop:
+    - "{{ gitea_ssh_port | default(2222, true) }}"
+    - "{{ gitea_web_port | default(3000, true) }}"
+
+- name: Ensure gitea registry configuration is in place
+  ansible.builtin.copy:
+    content: |
+      "[[registry]]
+       location = "localhost:3000"
+       insecure = true"
+    dest: /etc/containers/registies.conf.d/gitea.conf
+    mode: 0755
