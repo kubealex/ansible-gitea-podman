@@ -4,4 +4,4 @@ gitea_ssh_port: 2222
 gitea_web_port: 3000
 gitea_admin_user: root
 gitea_admin_password: redhat
-giteam_admin_email: root@gitea.lab
+gitea_admin_email: root@gitea.lab
