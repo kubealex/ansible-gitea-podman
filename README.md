@@ -1,7 +1,7 @@
 ansible-gitea-podman
 =========
 
-This is a quick and dirty role to instantiate a Podman based Gitea instance for dev/test purposes.
+This is a quick and dirty role to instantiate a Podman based Gitea [https://gitea.io/en-us/](https://gitea.io/en-us/) instance for dev/test purposes.
 
 Role Variables
 --------------
