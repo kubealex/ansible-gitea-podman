@@ -11,4 +11,3 @@
     name: firewalld
     state: started
     enabled: true
-

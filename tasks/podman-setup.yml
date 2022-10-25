@@ -17,7 +17,7 @@
       - gitea:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-    image: gitea/gitea:latest
+    image: docker.io/gitea/gitea:latest
     ports:
       - "{{ gitea_ssh_port | default(222,true) }}:22"
       - "{{ gitea_web_port | default(3000,true) }}:3000"
