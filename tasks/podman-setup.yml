@@ -17,5 +17,5 @@
       - gitea:/data
     image: docker.io/gitea/gitea:latest
     ports:
-      - "{{ gitea_ssh_port | default(222,true) }}:22"
+      - "{{ gitea_ssh_port | default(2222,true) }}:22"
       - "{{ gitea_web_port | default(3000,true) }}:3000"
