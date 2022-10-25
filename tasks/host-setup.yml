@@ -20,8 +20,8 @@
     state: enabled
     permanent: true
   loop:
-    - "{{ gitea_ssh_port | default(2222, true) }}"
-    - "{{ gitea_web_port | default(3000, true) }}"
+    - "{{ gitea_ssh_port | default(2222, true) }}/tcp"
+    - "{{ gitea_web_port | default(3000, true) }}/tcp"
 
 - name: Ensure gitea registry configuration is in place
   ansible.builtin.copy:
