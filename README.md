@@ -7,11 +7,11 @@ Role Variables
 --------------
 The role has these predefined variables in *defaults/main.yml*:
 
-gitea_ssh_port: 2222 # Sets up the listening port for SSH on the host
-gitea_web_port: 3000 # Sets up the listening port for Gitea web interface/Registry on the host
-gitea_admin_user: gitea # Admin username
-gitea_admin_password: redhat # Admin password
-gitea_admin_email: gitea@gitea.lab # Admin email
+    gitea_ssh_port: 2222 # Sets up the listening port for SSH on the host
+    gitea_web_port: 3000 # Sets up the listening port for Gitea web interface/Registry on the host
+    gitea_admin_user: gitea # Admin username
+    gitea_admin_password: redhat # Admin password
+    gitea_admin_email: gitea@gitea.lab # Admin email
 
 Dependencies
 ------------
