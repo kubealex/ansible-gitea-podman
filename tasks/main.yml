@@ -2,5 +2,8 @@
 # tasks file for ansible-gitea-podman
 - name: Include tasks
   ansible.builtin.include_tasks:
-    - host-setup.yml
-    - podman-setup.yml
+    file: host-setup.yml
+
+- name: Include tasks
+  ansible.builtin.include_tasks:
+    file: podman-setup.yml
