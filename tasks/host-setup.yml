@@ -25,11 +25,8 @@
   become: true
 
 - name: Ensure gitea registry configuration is in place
-  ansible.builtin.copy:
-    content: |
-      "[[registry]]
-       location = "localhost:3000"
-       insecure = true"
+  ansible.builtin.template:
+    src: gitea.conf.j2
     dest: /etc/containers/registries.conf.d/gitea.conf
     mode: 0755
   become: true
