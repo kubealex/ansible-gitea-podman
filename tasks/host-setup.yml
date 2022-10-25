@@ -3,7 +3,6 @@
   ansible.builtin.dnf:
     name:
       - podman
-      - firewalld
     state: present
   become: true
 
@@ -14,6 +13,10 @@
     enabled: true
   become: true
 
+- name: Gitea Setup | Check if firewalld is running
+  ansible.builtin.service_facts:
+  become: true
+
 - name: Gitea Setup | Ensure firewalld is configured to accept traffic
   ansible.posix.firewalld:
     port: "{{ item }}"
@@ -22,6 +25,7 @@
   loop:
     - "{{ gitea_ssh_port | default(2222, true) }}/tcp"
     - "{{ gitea_web_port | default(3000, true) }}/tcp"
+  when: ansible_facts.services["firewalld.service"] is defined
   become: true
 
 - name: Gitea Setup | Ensure gitea registry configuration is in place

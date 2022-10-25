@@ -29,4 +29,4 @@
 
 - name: Gitea Setup | Create admin user for gitea
   ansible.builtin.shell:
-    cmd: podman exec gitea gitea admin user create --username {{ gitea_admin_user }} --password {{ gitea_admin_password }} --email {{ gitea_admin_email }} --admin
+    cmd: podman exec gitea gitea admin user create --username {{ gitea_admin_user | default("gitea", true) }} --password {{ gitea_admin_password | default("redhat", true) }} --email {{ gitea_admin_email | default("gitea@admin.admin") }} --admin
