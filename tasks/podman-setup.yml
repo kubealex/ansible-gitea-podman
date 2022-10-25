@@ -8,8 +8,11 @@
 
 - name: Gitea Setup | Configure podman volume
   containers.podman.podman_volume:
-    name: gitea
+    name: "{{ item }}"
     state: present
+  loop:
+    - gitea-data
+    - gitea-config
 
 - name: Gitea Setup | Ensure Gitea container is not present already
   containers.podman.podman_container:
@@ -22,7 +25,9 @@
     network:
       - gitea
     volume:
-      - gitea:/data
+      - gitea-data:/var/lib/gitea
+      - gitea-config:/etc/gitea
+
     image: docker.io/gitea/gitea:latest-rootless
     ports:
       - "{{ gitea_ssh_port | default(2222,true) }}:2222"
