@@ -22,6 +22,7 @@
   loop:
     - "{{ gitea_ssh_port | default(2222, true) }}/tcp"
     - "{{ gitea_web_port | default(3000, true) }}/tcp"
+  become: true
 
 - name: Ensure gitea registry configuration is in place
   ansible.builtin.copy:
@@ -31,3 +32,4 @@
        insecure = true"
     dest: /etc/containers/registries.conf.d/gitea.conf
     mode: 0755
+  become: true
