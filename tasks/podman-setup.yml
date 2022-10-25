@@ -8,6 +8,11 @@
   containers.podman.podman_volume:
     name: gitea
 
+- name: Ensure gitea container is not present already
+  containers.podman.podman_container:
+    name: gitea
+    state: absent
+
 - name: Create gitea container
   containers.podman.podman_container:
     name: gitea
