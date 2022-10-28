@@ -16,7 +16,8 @@ The role has these predefined variables in *defaults/main.yml*:
 Dependencies
 ------------
 
-*containers.podman* collection is required to run the module.
+*containers.podman* collection is required to run the module, install it running:
+    ansible-galaxy collection install containers.podman
 
 Example Playbook
 ----------------
