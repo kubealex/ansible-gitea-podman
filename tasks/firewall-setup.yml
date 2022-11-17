@@ -1,11 +1,4 @@
 ---
-- name: Gitea Setup | Install and enable Podman
-  ansible.builtin.dnf:
-    name:
-      - podman
-    state: present
-  become: true
-
 - name: Gitea Setup | Check if firewalld is running
   ansible.builtin.service_facts:
   become: true
@@ -28,19 +21,3 @@
         enabled: true
   when: ansible_facts.services["firewalld.service"] is defined
   become: true
-
-- name: Gitea Setup | Ensure gitea registry configuration is in place
-  ansible.builtin.template:
-    src: gitea.conf.j2
-    dest: /etc/containers/registries.conf.d/gitea.conf
-    mode: 0755
-  become: true
-
-- name: Gitea Setup | Enable ssh-rsa for localhost
-  ansible.builtin.blockinfile:
-    block: |
-      Host localhost
-        HostkeyAlgorithms +ssh-rsa
-        PubkeyAcceptedKeyTypes +ssh-rsa
-    dest: ~/.ssh/config
-    state: present

@@ -1,0 +1,9 @@
+---
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Print the package facts
+  ansible.builtin.fail:
+    msg: "Podman must be present to run"
+   when: ansible_facts.packages['podman'] is undefined
