@@ -17,8 +17,8 @@ Dependencies
 ------------
 
 *containers.podman* and *ansible.posix* collections are required to run the modules, install them running:
-    ansible-galaxy collection install -r requirements.yml
-    ansible-galaxy role install -r requirements.yml
+
+    ansible-galaxy install -r requirements.yml
 
 Example Playbook
 ----------------
