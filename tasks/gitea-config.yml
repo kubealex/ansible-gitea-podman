@@ -6,6 +6,12 @@
     mode: 0755
   become: true
 
+- name: Gitea Setup | Ensure ssh config file is present
+  ansible.builtin.file:
+    path: ~/.ssh/config
+    mode: "0600"
+    state: present
+
 - name: Gitea Setup | Enable ssh-rsa for localhost
   ansible.builtin.blockinfile:
     block: |
