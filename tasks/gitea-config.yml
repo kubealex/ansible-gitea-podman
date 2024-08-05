@@ -10,7 +10,7 @@
   ansible.builtin.file:
     path: ~/.ssh/config
     mode: "0600"
-    state: file
+    state: touch
 
 - name: Gitea Setup | Enable ssh-rsa for localhost
   ansible.builtin.blockinfile:
