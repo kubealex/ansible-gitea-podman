@@ -47,7 +47,7 @@
       - "{{ gitea_web_port | default(3000,true) }}:3000"
     env:
       GITEA__security__INSTALL_LOCK: true
-      GITEA__server__ROOT_URL: "https://{{ ansible_fqdn }}:{{ gitea_web_port | default(3000,true) }}"
+      GITEA__server__ROOT_URL: "http://{{ ansible_fqdn }}:{{ gitea_web_port | default(3000,true) }}"
 
 - name: Gitea Setup | Create admin user for gitea
   ansible.builtin.shell:
