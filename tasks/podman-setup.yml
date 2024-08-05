@@ -1,3 +1,8 @@
+- name: Gitea Setup | Ensure Gitea container is not present already
+  containers.podman.podman_container:
+    name: gitea
+    state: absent
+
 - name: Gitea Setup | Ensure podman network is not present already
   containers.podman.podman_network:
     name: gitea
@@ -26,11 +31,6 @@
   loop:
     - gitea-data
     - gitea-config
-
-- name: Gitea Setup | Ensure Gitea container is not present already
-  containers.podman.podman_container:
-    name: gitea
-    state: absent
 
 - name: Gitea Setup | Create gitea container
   containers.podman.podman_container:
