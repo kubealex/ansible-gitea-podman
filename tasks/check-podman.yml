@@ -4,6 +4,6 @@
     manager: auto
 
 - name: Gitea Setup | Print the package facts
+  when: ansible_facts.packages['podman'] is undefined
   ansible.builtin.fail:
     msg: "Podman must be present to run"
-   when: ansible_facts.packages['podman'] is undefined
