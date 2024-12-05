@@ -15,7 +15,7 @@
     internal: false
     recreate: false
     state: present
-    
+
 - name: Gitea Setup | Ensure podman volume is not present already
   containers.podman.podman_volume:
     name: "{{ item }}"
@@ -23,7 +23,7 @@
   loop:
     - gitea-data
     - gitea-config
-    
+
 - name: Gitea Setup | Configure podman volume
   containers.podman.podman_volume:
     name: "{{ item }}"
@@ -31,6 +31,17 @@
   loop:
     - gitea-data
     - gitea-config
+
+- name: Gitea Setup | Create gitea container to generate certs
+  containers.podman.podman_container:
+    name: gitea-certs
+    network:
+      - gitea
+    volume:
+      - gitea-data:/var/lib/gitea
+    image: docker.io/gitea/gitea:latest-rootless
+    rm: true
+    command: gitea cert --host "https://{{ ansible_fqdn }}"
 
 - name: Gitea Setup | Create gitea container
   containers.podman.podman_container:
@@ -40,7 +51,6 @@
     volume:
       - gitea-data:/var/lib/gitea
       - gitea-config:/etc/gitea
-
     image: docker.io/gitea/gitea:latest-rootless
     ports:
       - "{{ gitea_ssh_port | default(2222,true) }}:2222"
@@ -48,6 +58,9 @@
     env:
       GITEA__security__INSTALL_LOCK: true
       GITEA__server__ROOT_URL: "https://{{ ansible_fqdn }}:{{ gitea_web_port | default(3000,true) }}"
+      GITEA__server__PROTOCOL: "https"
+      GITEA__server__CERT_FILE: "/var/lib/gitea/cert.pem"
+      GITEA__server__KEY_FILE: "/var/lib/gitea/key.pem"
 
 - name: Gitea Setup | Create admin user for gitea
   ansible.builtin.shell:
