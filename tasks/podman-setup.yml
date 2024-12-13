@@ -41,7 +41,7 @@
       - gitea-data:/var/lib/gitea
     image: docker.io/gitea/gitea:latest-rootless
     rm: true
-    command: gitea cert --host "{{ ansible_fqdn }}"
+    command: gitea cert --host "{{ ansible_fqdn }}" --ca
 
 - name: Gitea Setup | Create gitea container
   containers.podman.podman_container:
