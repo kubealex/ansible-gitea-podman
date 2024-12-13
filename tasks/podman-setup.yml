@@ -52,6 +52,7 @@
       - gitea-data:/var/lib/gitea
       - gitea-config:/etc/gitea
     image: docker.io/gitea/gitea:latest-rootless
+    restart_policy: always    
     ports:
       - "{{ gitea_ssh_port | default(2222,true) }}:2222"
       - "{{ gitea_web_port | default(3000,true) }}:3000"
