@@ -63,7 +63,8 @@
       GITEA__server__CERT_FILE: "/var/lib/gitea/cert.pem"
       GITEA__server__KEY_FILE: "/var/lib/gitea/key.pem"
       GITEA__webhook__ALLOWED_HOST_LIST: "*"
-      GITEA__webhook__SKIP_TLS_VERIFY: true    
+      GITEA__webhook__SKIP_TLS_VERIFY: true
+      GITEA__migrations__ALLOWED_DOMAINS: "github.com, *.github.com"
 
 - name: Gitea Setup | Wait for container to settle
   ansible.builtin.pause:
