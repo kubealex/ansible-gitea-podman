@@ -62,6 +62,10 @@
       GITEA__server__CERT_FILE: "/var/lib/gitea/cert.pem"
       GITEA__server__KEY_FILE: "/var/lib/gitea/key.pem"
 
+- name: Gitea Setup | Wait for container to settle
+  ansible.builtin.sleep:
+    seconds: 15
+    
 - name: Gitea Setup | Create admin user for gitea
   ansible.builtin.shell:
     cmd: podman exec gitea gitea admin user create --username {{ gitea_admin_user | default("gitea", true) }} --password {{ gitea_admin_password | default("redhat", true) }} --email {{ gitea_admin_email | default("gitea@admin.admin") }} --admin
