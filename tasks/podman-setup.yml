@@ -63,7 +63,7 @@
       GITEA__server__KEY_FILE: "/var/lib/gitea/key.pem"
 
 - name: Gitea Setup | Wait for container to settle
-  ansible.builtin.sleep:
+  ansible.builtin.pause:
     seconds: 15
     
 - name: Gitea Setup | Create admin user for gitea
